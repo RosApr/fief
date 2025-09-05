@@ -163,7 +163,8 @@ function getChildren(accumulator, children) {
 
 function useAction(fn) {
     const currentFiber = useFiber()
-    (currentFiber.action || (currentFiber.action = [])).push(fn)
+    currentFiber.action = currentFiber.action || []
+    currentFiber.action.push(fn)
 }
 
 export { useAction, renderToString }

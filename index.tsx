@@ -3,9 +3,8 @@
 import path from 'path'
 import fs from 'fs/promises'
 import { h, useState, resetFiber } from 'fre'
-import Koa from 'koa'
 import { renderToString, useAction } from './render-to-string.js'
-
+import { H3, serve } from "h3";
 
 
 const templatePath = path.join(process.cwd(), './index.html')
@@ -28,16 +27,13 @@ function App() {
   )
 }
 
-const app = new Koa()
+const app = new H3({ debug: true });
 
 app.get('/', async (ctx) => {
   //@ts-ignore
   const content = await renderToString(<App /> as any)
-  ctx.body = template.replace('<!-- fre -->', content)
+  return template.replace('<!-- fre -->', content)
 })
 
 
-const port = 3000
-app.listen(port, () => {
-  console.log(`app start on port ${port}`)
-})
+serve(app);
