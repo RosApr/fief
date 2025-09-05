@@ -1,0 +1,17 @@
+{
+  "name": "fief",
+  "type": "module",
+  "version": "1.0.1",
+  "dependencies": {
+    "fre": "^2.8.4",
+    "koa": "^2.15.3",
+    "tsx": "^4.20.5"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.1",
+    "typescript": "^5.9.2"
+  },
+  "scripts": {
+    "start": "tsx index.tsx"
+  }
+}

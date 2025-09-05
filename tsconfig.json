@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "jsxImportSource": "fre",
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "target": "ESNext"
+    },
+    "include": [
+        "**/*.ts",
+        "**/*.tsx"
+    ], // 明确包含 ts 和 tsx 文件
+    "exclude": [
+        "node_modules"
+    ]
+}
