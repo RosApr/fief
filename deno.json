@@ -1,4 +1,5 @@
 {
+  "name": "fief",
   "enable": true,
   "tasks": {
     "dev": "MODE=development deno run -A --watch server.ts",
