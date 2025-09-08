@@ -13,8 +13,8 @@ export default function () {
   console.log(data)
   return (
     <div>
-      <h1>Hello{data.hello}</h1>
-      <img src="/static/example.avif" />
+      <h1>Hello {data.hello}</h1>
+      <img src="/static/example.jpg" style={{width:'400px'}}/>
     </div>
   )
 }
