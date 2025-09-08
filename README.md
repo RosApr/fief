@@ -4,6 +4,7 @@
 
 ```bash
 deno init .
+deno add jsr:@fre/kit
 ```
 
 Create a simple page in `app/routes/index.tsx`

@@ -126,7 +126,7 @@ ${html}
 `,
           {
             headers: {
-              "X-Powered-By": "denvia",
+              "X-Powered-By": "@fre/kit",
               "Content-Type": "text/html",
             },
           },
