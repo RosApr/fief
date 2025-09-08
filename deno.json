@@ -1,8 +1,7 @@
 {
   "enable": true,
   "tasks": {
-    "dev": "MODE=development deno run -A --watch server.ts",
-    "start:prod": "MODE=production deno run -A server.ts"
+    "dev": "MODE=development deno run -A --watch server.ts"
   },
   "imports": {
     "@std/assert": "jsr:@std/assert@1",
