@@ -1,4 +1,4 @@
-import { resetCursor, resetFiber, useFiber } from "fre"
+import { h, resetCursor, resetFiber } from "./fre.ts"
 
 const VOID_ELEMENTS = new Set([
     'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
@@ -10,7 +10,6 @@ const NON_DIMENSIONAL = /^(opacity|zIndex|fontWeight|lineHeight|zoom|flex|flexGr
 function attributeHook(name, value, isComponent) {
     const type = typeof value
 
-    if (name === 'dangerouslySetInnerHTML') return false
     if (value == null || type === 'function') return ''
 
     if (!isComponent && (value === false ||
@@ -25,8 +24,7 @@ function attributeHook(name, value, isComponent) {
     return `\n\t${name}="${encodeEntities(value)}"`
 }
 
-async function renderToString(vnode, isSvgMode = false, selectValue) {
-    resetFiber(null)
+function renderToString(vnode, isSvgMode = false, selectValue) {
     if (vnode == null || typeof vnode === 'boolean') return ''
 
     const { type: nodeName, props = {} } = vnode
@@ -36,35 +34,25 @@ async function renderToString(vnode, isSvgMode = false, selectValue) {
     }
 
     if (typeof nodeName === 'function') {
-        return await renderComponent(vnode, isSvgMode, selectValue)
+        return renderComponent(vnode, isSvgMode, selectValue)
     }
 
-    return await renderElement(nodeName, props, isSvgMode, selectValue)
+    return renderElement(nodeName, props, isSvgMode, selectValue)
 }
 
-async function renderComponent(vnode, isSvgMode, selectValue) {
+function renderComponent(vnode, isSvgMode, selectValue) {
+
     resetCursor()
     resetFiber(vnode)
 
-    let tempVnode = vnode.type.call(vnode, vnode.props)
 
-    if (vnode.action?.length) {
-        resetCursor()
-        const cleanups = await Promise.all(vnode.action.map(fn => Promise.resolve(fn())))
-        vnode.action = []
+    let child = vnode.type.call(vnode, vnode.props)
+    child.parent = vnode
 
-        tempVnode = vnode.type.call(vnode, vnode.props)
-
-        cleanups.filter(Boolean).forEach(cleanup => cleanup())
-    }
-
-    delete vnode.action
-    resetFiber(null)
-
-    return renderToString(tempVnode, isSvgMode, selectValue)
+    return renderToString(child, isSvgMode, selectValue)
 }
 
-async function renderElement(nodeName, props, isSvgMode, selectValue) {
+function renderElement(nodeName, props, isSvgMode, selectValue) {
     let htmlStr = `<${nodeName}`
     let innerHtml = ''
     const children = []
@@ -80,11 +68,6 @@ async function renderElement(nodeName, props, isSvgMode, selectValue) {
 
         if (attrName === 'style' && value && typeof value === 'object') {
             value = styleObjToCss(value)
-        }
-
-        if (attrName === 'dangerouslySetInnerHTML') {
-            innerHtml = value?.__html || ''
-            return
         }
 
         if (attrName === 'value') {
@@ -119,7 +102,7 @@ async function renderElement(nodeName, props, isSvgMode, selectValue) {
                         ? false
                         : isSvgMode
 
-                htmlStr += await renderToString(child, childSvgMode, selectValue)
+                htmlStr += renderToString(child, childSvgMode, selectValue)
             }
         }
     }
@@ -161,10 +144,4 @@ function getChildren(accumulator, children) {
     return accumulator
 }
 
-function useAction(fn) {
-    const currentFiber = useFiber()
-    currentFiber.action = currentFiber.action || []
-    currentFiber.action.push(fn)
-}
-
-export { useAction, renderToString }
+export { renderToString }
