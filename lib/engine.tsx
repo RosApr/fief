@@ -1,5 +1,5 @@
 import { HttpStatus, MIME_TYPE } from "./constant.ts"
-import { renderToString } from "./r2s.ts"
+import { renderToString } from "./ssr.ts"
 import type { EngineConfig, RouteHandler } from "./type.ts"
 import { toFileUrl } from "@std/path"
 import { h } from 'fre'
@@ -122,7 +122,16 @@ function devEngine(config: EngineConfig) {
 
         return new Response(
           `<!DOCTYPE html>
-${html}
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fre SSR</title>
+</head>
+<body>
+  <div id="app">${html}</div>
+</body>
+</html>
 `,
           {
             headers: {

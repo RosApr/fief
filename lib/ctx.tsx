@@ -1,5 +1,5 @@
 
-import { useContext, createContext } from "./fre.ts"
+import { useContext, createContext } from "fre"
 
 export const LoaderDataContext  = createContext({})
 

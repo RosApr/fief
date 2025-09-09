@@ -1,4 +1,4 @@
-import { h, resetCursor, resetFiber } from "./fre.ts"
+import { h, resetCursor, resetFiber } from "fre"
 
 const VOID_ELEMENTS = new Set([
     'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
@@ -18,10 +18,10 @@ function attributeHook(name, value, isComponent) {
     }
 
     if (type !== 'string') {
-        return `\n\t${name}={${value}}`
+        return ` ${name}={${value}}`
     }
 
-    return `\n\t${name}="${encodeEntities(value)}"`
+    return ` ${name}="${encodeEntities(value)}"`
 }
 
 function renderToString(vnode, isSvgMode = false, selectValue) {
@@ -49,7 +49,7 @@ function renderComponent(vnode, isSvgMode, selectValue) {
     let child = vnode.type.call(vnode, vnode.props)
     child.parent = vnode
 
-    return renderToString(child, isSvgMode, selectValue)
+    return `<!-- ${vnode.type.name} -->${renderToString(child, isSvgMode, selectValue)}<!-- ${vnode.type.name} -->`
 }
 
 function renderElement(nodeName, props, isSvgMode, selectValue) {
