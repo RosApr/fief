@@ -96,9 +96,10 @@ function devEngine(config) {
             // 处理API请求
             if (pathname.includes("/api/")) {
                 try {
-                    let apiPath = pathname.replace(/^\//, "").replace(/\//g, ".")
+                    let apiPath = pathname.replace(/^\//, "")
                     const modulePath = resolve(routesDir, `${apiPath}.ts`)
                     const moduleUrl = pathToFileURL(modulePath).href
+                    console.log(moduleUrl)
                     const { loader } = await import(moduleUrl)
 
                     const loaderFnRes = typeof loader === 'function' ? await loader(request) : null
