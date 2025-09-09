@@ -241,7 +241,7 @@ function ae(e2) {
   return e2.children;
 }
 
-// ctx.ts
+// src/ctx.ts
 var LoaderDataContext = y({});
 if (!globalThis.__fre_globalFiber) {
   globalThis.__fre_globalFiber = {
@@ -265,5 +265,5 @@ function routes_default() {
   return /* @__PURE__ */ ne("div", null, /* @__PURE__ */ ne("h1", null, "Hello ", data.hello), /* @__PURE__ */ ne("img", { src: "/static/example.jpg", style: { width: "400px" } }));
 }
 
-// client-entry.tsx
+// src/client-entry.tsx
 P(/* @__PURE__ */ ne(routes_default, null), document.getElementById("app"));

@@ -1,4 +1,4 @@
-import { createServerSideRendering } from "./engine.tsx";
+import { createServerSideRendering } from "./engine.js";
 import http from 'node:http';
 
 const { render } = await createServerSideRendering({

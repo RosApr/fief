@@ -1,4 +1,4 @@
-import { useLoaderData } from "../../ctx"
+import { useLoaderData } from "../../src/ctx"
 import { h } from 'fre'
 
 export async function loader() {

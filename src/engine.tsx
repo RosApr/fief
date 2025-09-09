@@ -1,4 +1,4 @@
-import { HttpStatus, MIME_TYPE } from "./const.ts"
+import { HttpStatus, MIME_TYPE } from "./const.js"
 import { renderToString } from "./render-to-string.js"
 import { pathToFileURL } from "url"
 import { readdir, readFile, stat } from "fs/promises"

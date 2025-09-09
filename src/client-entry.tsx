@@ -1,6 +1,6 @@
 import { render, useState, useEffect, h } from 'fre'
-import App from './app/routes/index'
-import { hydrate } from './hydrate'
+import App from '../app/routes/index'
+import { hydrate } from '../hydrate'
 
 
 

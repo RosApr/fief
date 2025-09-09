@@ -13,7 +13,7 @@ async function bundleClientCode(rootDir) {
 
     // 增强JSX处理配置
     const result = await esbuild .build({
-        entryPoints: ['client-entry.tsx'],
+        entryPoints: ['src/client-entry.tsx'],
         bundle: true,
         format: 'esm',
         metafile: true,
