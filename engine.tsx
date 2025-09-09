@@ -176,8 +176,7 @@ function devEngine(config) {
 </head>
 <body>
   <div id="app">${html}</div>
-  <!-- 引入客户端打包脚本进行水合 -->
-  <script src="/static/client.js"></script>
+  <script src="/static/client-entry.js" type="module"></script>
 </body>
 </html>
 `,
