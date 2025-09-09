@@ -12,6 +12,6 @@
     "typescript": "^5.9.2"
   },
   "scripts": {
-    "start": "node build.mjs && tsx src/server.ts"
+    "start": "tsx build.ts && tsx src/server.ts"
   }
 }
