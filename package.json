@@ -12,6 +12,6 @@
     "typescript": "^5.9.2"
   },
   "scripts": {
-    "start": "tsx index.tsx"
+    "start": "tsx server.ts"
   }
 }
