@@ -1,0 +1,12 @@
+{
+    "name": "@fre/kit",
+    "version": "0.0.1",
+    "exports": "./mod.ts",
+    "license": "MIT",
+    "tasks": {
+        "publish": "npx jsr publish --no-check --allow-slow-types --allow-dirty"
+    },
+    "imports": {
+        "fre": "npm:fre@2.8.6-fix3"
+    }
+}

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { createServerSideRendering } from "./engine.tsx";
 import http from 'node:http';
 
@@ -53,3 +54,12 @@ function serve(handler) {
 
 serve(render);
     
+=======
+import { createServerSideRendering } from "./lib/mod.ts";
+
+const { render } = await createServerSideRendering({
+  rootDir: `${Deno.cwd()}/app`,
+});
+
+Deno.serve((req) => render(req));
+>>>>>>> 44ca14ddeff7d1e8e1369d769faa2d76f77e61ca
