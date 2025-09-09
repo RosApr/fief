@@ -1,27 +1,27 @@
 import { HttpStatus, MIME_TYPE } from "./const.ts"
 import { renderToString } from "./render-to-string.js"
-import { fileURLToPath, pathToFileURL } from "node:url"
-import { readdir, readFile, stat } from "node:fs/promises"
-import { join, dirname, resolve, relative } from "node:path"
-import { useContext, createContext,h } from "fre"
+import { fileURLToPath, pathToFileURL } from "url"
+import { readdir, readFile, stat, writeFile, mkdir } from "fs/promises"
+import { join, dirname, resolve, relative } from "path"
+import { useContext, createContext, h } from "fre"
 
-export const LoaderDataContext  = createContext({})
+export const LoaderDataContext = createContext({})
 
 if (!globalThis.__fre_globalFiber) {
-  globalThis.__fre_globalFiber = {
-    current: createContext({}) // 存储 currentFiber 的实际值
-  };
+    globalThis.__fre_globalFiber = {
+        current: createContext({}) // 存储 currentFiber 的实际值
+    }
 }
 
 export function useLoaderData() {
-  return useContext(globalThis.__fre_globalFiber.current)
+    return useContext(globalThis.__fre_globalFiber.current)
 }
 
 const routes = new Map()
 const assets = new Map()
 
-// 辅助函数：获取当前模块目录
-const __dirname = dirname(fileURLToPath(import.meta.url))
+
+
 
 async function resolveRoutes(dir) {
     const entries = await readdir(dir, { withFileTypes: true })
@@ -80,6 +80,7 @@ function devEngine(config) {
 
     return {
         async render(request) {
+
             const url = new URL(request.url, `http://${request.headers.host}`)
             let { pathname } = url
 
@@ -106,6 +107,7 @@ function devEngine(config) {
                     })
                 }
             }
+
             // 处理API请求
             if (pathname.includes("/api/")) {
                 try {
@@ -157,6 +159,9 @@ function devEngine(config) {
                     </Ctx>
                 )
 
+                // 序列化loader数据，用于客户端水合
+                const loaderData = JSON.stringify(res || {}).replace(/</g, '\\u003c')
+
                 return new Response(
                     `<!DOCTYPE html>
 <html>
@@ -164,9 +169,15 @@ function devEngine(config) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fre SSR</title>
+  <!-- 注入loader数据，供客户端使用 -->
+  <script id="__FRE_LOADER_DATA__" type="application/json">
+    ${loaderData}
+  </script>
 </head>
 <body>
   <div id="app">${html}</div>
+  <!-- 引入客户端打包脚本进行水合 -->
+  <script src="/static/client.js"></script>
 </body>
 </html>
 `,

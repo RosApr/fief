@@ -1,5 +1,5 @@
 import { useLoaderData } from "../../engine"
-import { h } from 'fre'
+import { h } from '../../fre-esm.js'
 
 export async function loader() {
   const res = await fetch("http://localhost:3000/api/meta")
