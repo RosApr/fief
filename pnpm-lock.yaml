@@ -12,8 +12,8 @@ importers:
         specifier: ^0.25.9
         version: 0.25.9
       fre:
-        specifier: 2.8.6-fix4
-        version: 2.8.6-fix4
+        specifier: 2.8.6-fix6
+        version: 2.8.6-fix6
       h3:
         specifier: 2.0.0-beta.0
         version: 2.0.0-beta.0
@@ -200,8 +200,8 @@ packages:
   fetchdts@0.1.7:
     resolution: {integrity: sha512-YoZjBdafyLIop9lSxXVI33oLD5kN31q4Td+CasofLLYeLXRFeOsuOw0Uo+XNRi9PZlbfdlN2GmRtm4tCEQ9/KA==}
 
-  fre@2.8.6-fix4:
-    resolution: {integrity: sha512-fhpD+mlZdyhYWOcAJNV/AL6zdYagHilo+6in8yi94rvOyoiJuhhZJp97mOo/vzGVXlMzpd8R5i7n0Kln3PnPqg==}
+  fre@2.8.6-fix6:
+    resolution: {integrity: sha512-PAcsaY+fOuNKJHgo/xqbM8ZpJ0CmP0qFgXfhsCLhZEeeO8Sl3i0Ow1KAhzFkdh7pjJzIyMnULuKHuT2sMiXEqg==}
 
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
@@ -361,7 +361,7 @@ snapshots:
 
   fetchdts@0.1.7: {}
 
-  fre@2.8.6-fix4: {}
+  fre@2.8.6-fix6: {}
 
   fsevents@2.3.3:
     optional: true

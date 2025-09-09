@@ -49,7 +49,7 @@ function renderComponent(vnode, isSvgMode, selectValue) {
     let child = vnode.type.call(vnode, vnode.props)
     child.parent = vnode
 
-    return `<!-- ${vnode.type.name} -->${renderToString(child, isSvgMode, selectValue)}<!-- ${vnode.type.name} -->`
+    return `${renderToString(child, isSvgMode, selectValue)}`
 }
 
 function renderElement(nodeName, props, isSvgMode, selectValue) {

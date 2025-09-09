@@ -7,7 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 
 // 使用 esbuild 打包客户端代码，添加JSX支持
-export async function bundleClientCode(rootDir) {
+async function bundleClientCode(rootDir) {
 
 
 

@@ -1,27 +1,12 @@
 import { HttpStatus, MIME_TYPE } from "./const.ts"
 import { renderToString } from "./render-to-string.js"
-import { fileURLToPath, pathToFileURL } from "url"
-import { readdir, readFile, stat, writeFile, mkdir } from "fs/promises"
+import { pathToFileURL } from "url"
+import { readdir, readFile, stat } from "fs/promises"
 import { join, dirname, resolve, relative } from "path"
 import { useContext, createContext, h } from "fre"
 
-export const LoaderDataContext = createContext({})
-
-if (!globalThis.__fre_globalFiber) {
-    globalThis.__fre_globalFiber = {
-        current: createContext({}) // 存储 currentFiber 的实际值
-    }
-}
-
-export function useLoaderData() {
-    return useContext(globalThis.__fre_globalFiber.current)
-}
-
 const routes = new Map()
 const assets = new Map()
-
-
-
 
 async function resolveRoutes(dir) {
     const entries = await readdir(dir, { withFileTypes: true })
@@ -169,9 +154,8 @@ function devEngine(config) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fre SSR</title>
-  <!-- 注入loader数据，供客户端使用 -->
-  <script id="__FRE_LOADER_DATA__" type="application/json">
-    ${loaderData}
+  <script>
+   window.__FRE_LOADER_DATA__= ${loaderData}
   </script>
 </head>
 <body>
